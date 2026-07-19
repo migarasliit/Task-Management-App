@@ -1,7 +1,7 @@
 // frontend/src/components/TaskList.jsx
 import TaskItem from './TaskItem';
 
-function TaskList({ tasks, isLoading }) {
+function TaskList({ tasks, isLoading, onDelete, onStatusChange }) {
   if (isLoading) {
     return <p className="loading-text">Loading tasks...</p>;
   }
@@ -17,7 +17,12 @@ function TaskList({ tasks, isLoading }) {
   return (
     <div className="task-list">
       {tasks.map((task) => (
-        <TaskItem key={task._id} task={task} />
+        <TaskItem 
+          key={task._id} 
+          task={task} 
+          onDelete={onDelete}
+          onStatusChange={onStatusChange}
+        />
       ))}
     </div>
   );

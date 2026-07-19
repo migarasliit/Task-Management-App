@@ -158,3 +158,37 @@ body {
   color: #4f46e5;
   font-weight: 600;
 }
+ 
+
+.status-select {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  background-color: white;
+  font-size: 0.85rem;
+  cursor: pointer;
+  font-weight: 600;
+  color: #374151;
+}
+
+.status-select:focus {
+  outline: none;
+  border-color: #4f46e5;
+}
+
+.btn-delete {
+  background-color: #fee2e2;
+  color: #dc2626;
+  padding: 6px 12px;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.btn-delete:hover {
+  background-color: #dc2626;
+  color: white;
+}
