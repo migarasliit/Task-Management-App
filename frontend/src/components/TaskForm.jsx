@@ -14,51 +14,55 @@ function TaskForm({ onAddTask }) {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    setError(''); // Clear error when user types
+    setError('');
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    // Basic Validation
     if (!formData.title.trim() || !formData.description.trim() || !formData.dueDate) {
-      setError('Please fill in all required fields (Title, Description, Due Date).');
+      setError('Please fill in all required fields.');
       return;
     }
 
-    // Pass data up to parent component (we will connect to API in Step 4)
     onAddTask(formData);
-    
-    // Reset form
     setFormData({ title: '', description: '', priority: 'Medium', dueDate: '' });
   };
 
   return (
-    <div className="container" style={{ backgroundColor: 'white', padding: '2rem', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.05)' }}>
-      <h2 style={{ marginBottom: '1.5rem' }}>Add New Task</h2>
+    <div className="bg-white rounded-xl shadow-md p-8 mb-8">
+      <h2 className="text-2xl font-bold text-gray-900 mb-6">Add New Task</h2>
       
-      {error && <p style={{ color: 'red', marginBottom: '1rem', fontSize: '0.9rem' }}>{error}</p>}
+      {error && (
+        <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg">
+          <p className="text-red-600 text-sm">{error}</p>
+        </div>
+      )}
       
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="title">Task Title *</label>
+      <form onSubmit={handleSubmit} className="space-y-5">
+        <div>
+          <label htmlFor="title" className="block text-sm font-semibold text-gray-700 mb-2">
+            Task Title <span className="text-red-500">*</span>
+          </label>
           <input
             type="text"
             id="title"
             name="title"
-            className="form-control"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
             placeholder="e.g., Complete MERN assignment"
             value={formData.title}
             onChange={handleChange}
           />
         </div>
 
-        <div className="form-group">
-          <label htmlFor="description">Description *</label>
+        <div>
+          <label htmlFor="description" className="block text-sm font-semibold text-gray-700 mb-2">
+            Description <span className="text-red-500">*</span>
+          </label>
           <textarea
             id="description"
             name="description"
-            className="form-control"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors resize-none"
             rows="3"
             placeholder="Briefly describe the task..."
             value={formData.description}
@@ -66,13 +70,15 @@ function TaskForm({ onAddTask }) {
           ></textarea>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-          <div className="form-group">
-            <label htmlFor="priority">Priority</label>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div>
+            <label htmlFor="priority" className="block text-sm font-semibold text-gray-700 mb-2">
+              Priority
+            </label>
             <select
               id="priority"
               name="priority"
-              className="form-control"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white"
               value={formData.priority}
               onChange={handleChange}
             >
@@ -82,21 +88,29 @@ function TaskForm({ onAddTask }) {
             </select>
           </div>
 
-          <div className="form-group">
-            <label htmlFor="dueDate">Due Date *</label>
+          <div>
+            <label htmlFor="dueDate" className="block text-sm font-semibold text-gray-700 mb-2">
+              Due Date <span className="text-red-500">*</span>
+            </label>
             <input
               type="date"
               id="dueDate"
               name="dueDate"
-              className="form-control"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
               value={formData.dueDate}
               onChange={handleChange}
             />
           </div>
         </div>
 
-        <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '1rem' }}>
-          Add Task
+        <button 
+          type="submit" 
+          className="w-full bg-primary-600 hover:bg-primary-700 text-white font-bold py-4 px-6 rounded-lg transition-all duration-200 flex items-center justify-center space-x-2 shadow-md hover:shadow-lg"
+        >
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+          </svg>
+          <span>Add Task</span>
         </button>
       </form>
     </div>

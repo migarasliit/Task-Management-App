@@ -10,8 +10,6 @@ function App() {
   const [tasks, setTasks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
-  
-  // NEW: Filter States
   const [filterPriority, setFilterPriority] = useState('All');
   const [filterStatus, setFilterStatus] = useState('All');
 
@@ -72,7 +70,6 @@ function App() {
     setFilterStatus('All');
   };
 
-  // NEW: Filtering Logic
   const filteredTasks = tasks.filter((task) => {
     const matchPriority = filterPriority === 'All' || task.priority === filterPriority;
     const matchStatus = filterStatus === 'All' || task.status === filterStatus;
@@ -82,19 +79,24 @@ function App() {
   return (
     <>
       <Navbar />
-      <main className="container">
+      <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <TaskForm onAddTask={handleAddTask} />
         
-        <div style={{ marginTop: '2rem' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-            <h2>Your Tasks</h2>
-            <span className="task-count">({filteredTasks.length} task{filteredTasks.length !== 1 ? 's' : ''})</span>
+        <div className="mt-8 space-y-6">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <h2 className="text-2xl font-bold text-gray-900">Your Tasks</h2>
+           <span className="text-sm font-medium text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
+  {filteredTasks.length} task{filteredTasks.length !== 1 ? 's' : ''}
+</span>
           </div>
           
-          {error && <p style={{ color: 'red', marginBottom: '1rem' }}>{error}</p>}
+          {error && (
+            <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
+              <p className="text-red-600 text-sm">{error}</p>
+            </div>
+          )}
           
-          {/* NEW: Filter Bar */}
-          <FilterBar 
+          <FilterBar
             filterPriority={filterPriority}
             setFilterPriority={setFilterPriority}
             filterStatus={filterStatus}
@@ -102,14 +104,12 @@ function App() {
             onReset={handleResetFilters}
           />
 
-          <div style={{ marginTop: '1.5rem' }}>
-            <TaskList 
-              tasks={filteredTasks} 
-              isLoading={isLoading} 
-              onDelete={handleDeleteTask}
-              onStatusChange={handleStatusChange}
-            />
-          </div>
+          <TaskList
+            tasks={filteredTasks}
+            isLoading={isLoading}
+            onDelete={handleDeleteTask}
+            onStatusChange={handleStatusChange}
+          />
         </div>
       </main>
     </>
