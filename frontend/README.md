@@ -62,7 +62,7 @@ A modern, responsive, and full-stack web application built using the MERN (Mongo
 ![alt text](image-1.png)
 3. **Filtering in Action:**  
 ![alt text](image-2.png)
-4. **Mobile View (Optional but recommended):**  
+4. **Mobile View :**  
 ![alt text](image-3.png)
  ```markdown
  
