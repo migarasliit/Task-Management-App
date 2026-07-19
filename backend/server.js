@@ -2,14 +2,22 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const connectDB = require('./config/db');
+const taskRoutes = require('./routes/taskRoutes');
 
 dotenv.config();
+
+// Connect to MongoDB
+connectDB();
 
 const app = express();
 
 // Middleware
 app.use(cors());
 app.use(express.json()); // Parses incoming JSON requests
+
+// Routes
+app.use('/api/tasks', taskRoutes);
 
 // Basic Route
 app.get('/', (req, res) => {
