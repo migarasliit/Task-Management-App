@@ -69,10 +69,10 @@ function TaskItem({ task, onDelete, onStatusChange }) {
         
         <div className="flex flex-col sm:flex-row gap-3 md:items-center">
           <select
-            value={task.status}
-            onChange={(e) => onStatusChange(task._id, e.target.value)}
-            className={`px-4 py-2 rounded-lg border font-semibold text-sm ${getStatusStyles(task.status)}`}
-          >
+  value={task.status}
+  onChange={(e) => onStatusChange(task._id, e.target.value)}
+  className={`px-4 py-2 rounded-lg border font-semibold text-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-600 ${getStatusStyles(task.status)}`}
+>
             <option value="Pending">Pending</option>
             <option value="In Progress">In Progress</option>
             <option value="Completed">Completed</option>
