@@ -3,12 +3,17 @@ import { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import TaskForm from './components/TaskForm';
 import TaskList from './components/TaskList';
+import FilterBar from './components/FilterBar';
 import { getTasks, createTask, updateTask, deleteTask } from './api';
 
 function App() {
   const [tasks, setTasks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
+  
+  // NEW: Filter States
+  const [filterPriority, setFilterPriority] = useState('All');
+  const [filterStatus, setFilterStatus] = useState('All');
 
   useEffect(() => {
     fetchTasks();
@@ -38,11 +43,9 @@ function App() {
     }
   };
 
-  // NEW: Handle Status Update
   const handleStatusChange = async (id, newStatus) => {
     try {
       const updatedTask = await updateTask(id, { status: newStatus });
-      // Update the specific task in the local state array
       setTasks((prevTasks) =>
         prevTasks.map((task) => (task._id === id ? updatedTask : task))
       );
@@ -52,12 +55,10 @@ function App() {
     }
   };
 
-  // NEW: Handle Delete
   const handleDeleteTask = async (id) => {
     if (window.confirm('Are you sure you want to delete this task?')) {
       try {
         await deleteTask(id);
-        // Remove the deleted task from the local state array
         setTasks((prevTasks) => prevTasks.filter((task) => task._id !== id));
       } catch (err) {
         console.error('Error deleting task:', err);
@@ -66,6 +67,18 @@ function App() {
     }
   };
 
+  const handleResetFilters = () => {
+    setFilterPriority('All');
+    setFilterStatus('All');
+  };
+
+  // NEW: Filtering Logic
+  const filteredTasks = tasks.filter((task) => {
+    const matchPriority = filterPriority === 'All' || task.priority === filterPriority;
+    const matchStatus = filterStatus === 'All' || task.status === filterStatus;
+    return matchPriority && matchStatus;
+  });
+
   return (
     <>
       <Navbar />
@@ -73,16 +86,30 @@ function App() {
         <TaskForm onAddTask={handleAddTask} />
         
         <div style={{ marginTop: '2rem' }}>
-          <h2 style={{ marginBottom: '1rem' }}>Your Tasks</h2>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+            <h2>Your Tasks</h2>
+            <span className="task-count">({filteredTasks.length} task{filteredTasks.length !== 1 ? 's' : ''})</span>
+          </div>
+          
           {error && <p style={{ color: 'red', marginBottom: '1rem' }}>{error}</p>}
           
-          {/* Pass the new handlers down to TaskList */}
-          <TaskList 
-            tasks={tasks} 
-            isLoading={isLoading} 
-            onDelete={handleDeleteTask}
-            onStatusChange={handleStatusChange}
+          {/* NEW: Filter Bar */}
+          <FilterBar 
+            filterPriority={filterPriority}
+            setFilterPriority={setFilterPriority}
+            filterStatus={filterStatus}
+            setFilterStatus={setFilterStatus}
+            onReset={handleResetFilters}
           />
+
+          <div style={{ marginTop: '1.5rem' }}>
+            <TaskList 
+              tasks={filteredTasks} 
+              isLoading={isLoading} 
+              onDelete={handleDeleteTask}
+              onStatusChange={handleStatusChange}
+            />
+          </div>
         </div>
       </main>
     </>
