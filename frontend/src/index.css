@@ -6,6 +6,11 @@
   body {
     @apply bg-gray-50 text-gray-900;
   }
+  
+  /* Dark mode base styles */
+  .dark body {
+    @apply bg-gray-900 text-gray-100;
+  }
 }
 
 @layer components {
@@ -27,5 +32,28 @@
   
   .card {
     @apply bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden;
+  }
+  
+  /* Dark mode component styles */
+  .dark .card {
+    @apply bg-gray-800 border-gray-700;
+  }
+  
+  .dark .input-field,
+  .dark .select-field {
+    @apply border-gray-600 bg-gray-800 text-gray-100;
+  }
+  
+  .dark .input-field:focus,
+  .dark .select-field:focus {
+    @apply border-primary-400 ring-2 ring-primary-400;
+  }
+  
+  .dark .btn-primary {
+    @apply bg-primary-500 hover:bg-primary-400;
+  }
+  
+  .dark .btn-delete {
+    @apply bg-red-900 hover:bg-red-800 hover:text-white text-red-200 border-red-700;
   }
 }
