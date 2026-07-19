@@ -102,6 +102,7 @@ function TaskForm({ onAddTask }) {
               className={inputClass}
               value={formData.dueDate}
               onChange={handleChange}
+              min={new Date().toISOString().split('T')[0]} 
             />
           </div>
         </div>
