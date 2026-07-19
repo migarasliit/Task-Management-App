@@ -29,26 +29,29 @@ function TaskForm({ onAddTask }) {
     setFormData({ title: '', description: '', priority: 'Medium', dueDate: '' });
   };
 
+  // Shared class for all inputs to ensure dark mode works perfectly
+  const inputClass = "w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-400 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors";
+
   return (
-    <div className="bg-white rounded-xl shadow-md p-8 mb-8">
-      <h2 className="text-2xl font-bold text-gray-900 mb-6">Add New Task</h2>
+    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-8 mb-8 border border-gray-200 dark:border-gray-700 transition-colors duration-300">
+      <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">Add New Task</h2>
       
       {error && (
-        <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg">
-          <p className="text-red-600 text-sm">{error}</p>
+        <div className="mb-4 p-3 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded-lg">
+          <p className="text-red-600 dark:text-red-300 text-sm">{error}</p>
         </div>
       )}
       
       <form onSubmit={handleSubmit} className="space-y-5">
         <div>
-          <label htmlFor="title" className="block text-sm font-semibold text-gray-700 mb-2">
+          <label htmlFor="title" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
             Task Title <span className="text-red-500">*</span>
           </label>
           <input
             type="text"
             id="title"
             name="title"
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
+            className={inputClass}
             placeholder="e.g., Complete MERN assignment"
             value={formData.title}
             onChange={handleChange}
@@ -56,13 +59,13 @@ function TaskForm({ onAddTask }) {
         </div>
 
         <div>
-          <label htmlFor="description" className="block text-sm font-semibold text-gray-700 mb-2">
+          <label htmlFor="description" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
             Description <span className="text-red-500">*</span>
           </label>
           <textarea
             id="description"
             name="description"
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors resize-none"
+            className={`${inputClass} resize-none`}
             rows="3"
             placeholder="Briefly describe the task..."
             value={formData.description}
@@ -72,13 +75,13 @@ function TaskForm({ onAddTask }) {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div>
-            <label htmlFor="priority" className="block text-sm font-semibold text-gray-700 mb-2">
+            <label htmlFor="priority" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
               Priority
             </label>
             <select
               id="priority"
               name="priority"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white"
+              className={inputClass}
               value={formData.priority}
               onChange={handleChange}
             >
@@ -89,14 +92,14 @@ function TaskForm({ onAddTask }) {
           </div>
 
           <div>
-            <label htmlFor="dueDate" className="block text-sm font-semibold text-gray-700 mb-2">
+            <label htmlFor="dueDate" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
               Due Date <span className="text-red-500">*</span>
             </label>
             <input
               type="date"
               id="dueDate"
               name="dueDate"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
+              className={inputClass}
               value={formData.dueDate}
               onChange={handleChange}
             />
@@ -105,7 +108,7 @@ function TaskForm({ onAddTask }) {
 
         <button 
           type="submit" 
-          className="w-full bg-primary-600 hover:bg-primary-700 text-white font-bold py-4 px-6 rounded-lg transition-all duration-200 flex items-center justify-center space-x-2 shadow-md hover:shadow-lg"
+          className="w-full bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-400 text-white font-bold py-4 px-6 rounded-lg transition-all duration-200 flex items-center justify-center space-x-2 shadow-md hover:shadow-lg"
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
