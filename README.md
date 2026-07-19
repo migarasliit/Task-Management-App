@@ -34,22 +34,29 @@ A modern, responsive, and full-stack web application built using the MERN (Mongo
    git clone https://github.com/migarasliit/Task-Management-App.git
    cd Task-Management-App
 2. **Backend Setup:**
+```bash
    cd backend
    npm install
 3. **Frontend Setup:**
+```bash
    cd frontend
    npm install
+   ```bash
 2. **Create a .env file in the backend folder and add your MongoDB connection string:**
    PORT=5000
    MONGO_URI=your_mongodb_connection_string_here
 3. **Start the backend server::**
+```bash
     npm run dev
 4. **Frontend Setup:**
+```bash
    cd frontend
    npm install
 5. **Start the frontend development server:**
+```bash
    npm run dev
 6. **Access the Application:**
+```bash
    Open your browser and navigate to http://localhost:5173.
  
  
