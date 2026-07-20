@@ -42,60 +42,87 @@ A modern, responsive, and full-stack web application built using the MERN (Mongo
    cd Task-Management-App
 
    Backend Setup:
+
 bash
-12
+
 Create a .env file in the backend folder:
+
 env
-12
+
 Start the backend server:
+
 bash
-1
+
 Frontend Setup:
+
 Open a new terminal and run:
+
 bash
-123
+
+
 Access the Application:
+
 Open your browser and navigate to http://localhost:5173
-📸 Screenshots
-Main Interface - Task Creation
 
-Task List with Dark Mode
-
-Filtering Functionality
-
-Mobile Responsive Design
-
-🎥 Demo Video
-Watch Project Demo (Add your video link here)
+ 
 📝 Project Structure
 
 Key Features Explained
+
 Task Management
+
 Create tasks with title, description, priority, and due date
+
 Update task status with dropdown selection
+
 Delete tasks with confirmation dialog
+
 Real-time updates without page refresh
+
 Filtering System
+
 Filter by Priority: All, High, Medium, Low
+
 Filter by Status: All, Pending, In Progress, Completed
+
 Clear filters button to reset view
+
 Live task count display
+
 Theme Toggle
+
 Smooth transition between light and dark modes
+
 User preference saved in localStorage
+
 Respects system preference on first visit
+
 All components fully themed
+
 🎯 Assignment Requirements Met
+
 ✅ Add a task with title, description, priority, and due date
+
 ✅ Display all tasks in a clear and organized list
+
 ✅ Edit and delete existing tasks
+
 ✅ Update task status (Pending, In Progress, Completed)
+
 ✅ Filter tasks by priority and status
+
 ✅ Validate all required input fields
+
 ✅ Create a responsive and user-friendly interface
+
 ✅ Use MongoDB database for data storage
+
 👨‍💻 Author
+
 Migara Wijesinghe
+
 Internship Assignment - MERN Stack Development
+
 📄 License
+
 This project is created as part of an internship assignment
