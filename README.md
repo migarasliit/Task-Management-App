@@ -61,16 +61,5 @@ A modern, responsive, and full-stack web application built using the MERN (Mongo
    Open your browser and navigate to http://localhost:5173.
  
  
----
-
-1. **Dark Mode View:** 
-![alt text](image.png)
-
-2. **Light Mode View:**  
-![alt text](image-1.png)
-3. **Filtering in Action:**  
-![alt text](image-2.png)
-4. **Mobile View (Optional but recommended):**  
-![alt text](image-3.png)
- ```markdown
+ 
  
