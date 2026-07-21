@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  # 1. MongoDB Database Service
+  mongodb:
+    image: mongo:6.0
+    container_name: task-mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password123
+    volumes:
+      - mongo-data:/data/db # Persist database data!
+
+  # 2. Backend Service
+  backend:
+    build: ./backend
+    container_name: task-backend
+    restart: always
+    ports:
+      - "5000:5000"
+    env_file:
+      - ./backend/.env
+    environment:
+      # Override the MONGO_URI to point to the local docker mongodb service!
+      - MONGO_URI=mongodb://admin:password123@mongodb:27017/taskDB?authSource=admin
+    depends_on:
+      - mongodb
+    volumes:
+      - ./backend:/app # Hot-reloading for development
+      - /app/node_modules # Prevents host node_modules from overwriting container
+
+  # 3. Frontend Service
+  frontend:
+    build: ./frontend
+    container_name: task-frontend
+    restart: always
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://localhost:5000/api/tasks # Frontend runs on your browser, so it needs localhost to reach your laptop's port 5000
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+
+# Define the persistent volume for MongoDB
+volumes:
+  mongo-data:

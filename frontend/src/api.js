@@ -2,7 +2,10 @@
 import axios from 'axios';
 
 // Set the base URL for all requests
-const API_URL = 'http://localhost:5000/api/tasks';
+//const API_URL = 'http://localhost:5000/api/tasks';
+
+// Use Docker service name if running in Docker, otherwise fallback to localhost
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api/tasks';
 
 // Fetch all tasks
 export const getTasks = async () => {
