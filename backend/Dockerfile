@@ -1,20 +1,23 @@
-# 1. Base Image: Use a lightweight Node.js image
-   FROM node:18-alpine
+# 1. Base Image: Use a Node image that supports crypto operations
+FROM node:20
 
- # 2. Working Directory: Set the folder inside the container
-   WORKDIR /app
+# 2. Install system dependencies for crypto operations
+RUN apt-get update && apt-get install -y openssl
 
-  # 3. Copy Dependencies: Copy package.json first (for better caching)
-   COPY package*.json ./
+# 3. Working Directory
+WORKDIR /app
 
-   # 4. Install Dependencies: Run npm install inside the container
-   RUN npm install
+# 4. Copy Dependencies
+COPY package*.json ./
 
-   # 5. Copy Source Code: Copy the rest of the backend code
-   COPY . .
+# 5. Install Dependencies
+RUN npm install
 
-   # 6. Expose Port: Tell Docker the container listens on port 5000
-   EXPOSE 5000
+# 6. Copy Source Code
+COPY . .
 
-   # 7. Command: Start the server
-   CMD ["npm", "run", "dev"]
+# 7. Expose Port
+EXPOSE 5000
+
+# 8. Command
+CMD ["npm", "run", "dev"]
