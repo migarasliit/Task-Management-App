@@ -1,0 +1,13 @@
+# k8s/backend-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+spec:
+  selector:
+    app: backend # Routes traffic to pods with this label
+  ports:
+    - protocol: TCP
+      port: 5000       # The port the Service listens on
+      targetPort: 5000 # The port the container is listening on
+  type: ClusterIP      # Only accessible inside the cluster
