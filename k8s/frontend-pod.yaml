@@ -1,0 +1,14 @@
+# k8s/frontend-pod.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: frontend-pod
+  labels:
+    app: frontend
+    environment: development
+spec:
+  containers:
+  - name: frontend-container
+    image: nginx:alpine
+    ports:
+    - containerPort: 80
