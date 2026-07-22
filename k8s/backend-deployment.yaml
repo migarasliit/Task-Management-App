@@ -24,4 +24,9 @@ spec:
         env:
         - name: PORT
           value: "5000"
-        # Note: We will add MongoDB connection in Phase 3 via ConfigMaps/Secrets!
+        # Note:  add MongoDB connection  via ConfigMaps/Secrets!
+        - name: MONGO_URI
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret       # Name of the Secret we just created
+              key: MONGO_URI 
