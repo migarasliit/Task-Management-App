@@ -23,4 +23,4 @@ spec:
         - containerPort: 5173
         env:
         - name: VITE_API_URL
-          value: "http://backend-service:5000/api/tasks" # Points to the K8s backend service!
+          value: "http://localhost:5000/api/tasks" # Points to the K8s backend service!
